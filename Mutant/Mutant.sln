@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MutantCore", "MutantCore.cs
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{2521F9C9-C8E0-4574-AA9E-F36608DA1EB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutantCoreTest", "..\MutantCoreTest\MutantCoreTest.csproj", "{CF5D7155-7A49-44BE-B649-2FC6C78DC53D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MutantCoreTest", "..\MutantCoreTest\MutantCoreTest.csproj", "{CF5D7155-7A49-44BE-B649-2FC6C78DC53D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MutantWebApp", "..\MutantWebApp\MutantWebApp.csproj", "{0508F6A6-50F1-4FBB-AFE1-ADD1D1413663}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{CF5D7155-7A49-44BE-B649-2FC6C78DC53D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF5D7155-7A49-44BE-B649-2FC6C78DC53D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF5D7155-7A49-44BE-B649-2FC6C78DC53D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0508F6A6-50F1-4FBB-AFE1-ADD1D1413663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0508F6A6-50F1-4FBB-AFE1-ADD1D1413663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0508F6A6-50F1-4FBB-AFE1-ADD1D1413663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0508F6A6-50F1-4FBB-AFE1-ADD1D1413663}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
