@@ -1,3 +1,4 @@
+using MutantCore.Models;
 using MutantCore.ValueObject;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ namespace MutantCoreTest
 {
     public class StringExtensionsTest
     {
-        private readonly IEnumerable<string> adn = new string[] { "abcdef", "abcdef", "abcdef", "abcdef", "abcdef", "aaaaaa" };
+        private readonly Dna dna = new Dna(new string[] { "abcdef", "abcdef", "abcdef", "abcdef", "abcdef", "aaaaaa" });
         
         [Fact]
         public void HorizontalValidator_ValidPredicate_RowsExpected()
@@ -15,7 +16,7 @@ namespace MutantCoreTest
             
             Predicate<string> predicate = s => s.Contains("abcd");
             IEnumerable<string> expected = new string[] { "abcdef", "abcdef", "abcdef", "abcdef", "abcdef" };
-            Assert.Equal(expected, adn.HorizontalValidator(predicate));
+            Assert.Equal(expected, dna.HorizontalValidator(predicate));
         }
 
         [Fact]
@@ -24,7 +25,7 @@ namespace MutantCoreTest
 
             Predicate<string> predicate = s => s.Contains("abcdd");
             IEnumerable<string> expected = new string[] { };
-            Assert.Empty(adn.HorizontalValidator(predicate));
+            Assert.Empty(dna.HorizontalValidator(predicate));
         }
 
         [Fact]
@@ -33,7 +34,7 @@ namespace MutantCoreTest
 
             Predicate<string> predicate = s => s.Contains("bbba");
             IEnumerable<string> expected = new string[] { "bbbbba" };
-            Assert.Equal(expected, adn.VerticalValidator(predicate));
+            Assert.Equal(expected, dna.VerticalValidator(predicate));
         }
 
         [Fact]
@@ -42,7 +43,7 @@ namespace MutantCoreTest
 
             Predicate<string> predicate = s => s.Contains("bbba");
             IEnumerable<string> expected = new string[] { "bbbbba" };
-            Assert.Equal(expected, adn.VerticalValidator(predicate));
+            Assert.Equal(expected, dna.VerticalValidator(predicate));
         }
 
         [Fact]
@@ -50,14 +51,14 @@ namespace MutantCoreTest
         {
             Predicate<string> predicate = s => s.Contains("abca");
             IEnumerable<string> expected = new string[] { "abca" };
-            Assert.Equal(expected, adn.DiagonalValidator(predicate));
+            Assert.Equal(expected, dna.DiagonalValidator(predicate));
         }
 
         [Fact]
         public void DiagonalValidator_InvalidPredicate_EmptyExpected()
         {
             Predicate<string> predicate = s => s.Contains("abcaa");
-            Assert.Empty(adn.DiagonalValidator(predicate));
+            Assert.Empty(dna.DiagonalValidator(predicate));
         }
     }
 }

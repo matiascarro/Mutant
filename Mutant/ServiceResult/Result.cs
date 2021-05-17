@@ -6,6 +6,8 @@ namespace MutantCore.ServiceResult
 {
     public interface IResult
     {
+        string Error { get; }
+        bool IsSuccessful();
     }
 
     public interface IResult<T>: IResult
@@ -13,51 +15,63 @@ namespace MutantCore.ServiceResult
         T Value { get; }
     }
 
-    public interface IResult<T, E> : IResult<T>
+    public class Result : IResult
     {
-        E Error { get; }
-        bool IsSuccessful();
+        private readonly bool succesfull;
+        public string Error { get; }
+        public bool IsSuccessful() => succesfull;
+
+        private Result()
+        {
+            succesfull = true;
+        }
+
+        private Result(string errorMsg)
+        {
+            Error = errorMsg;
+            succesfull = false;
+        }
+
+        public static Result CreateSuccessfulResult()
+        {
+            return new Result();
+        }
+
+        public static Result CreateFailureResult(string errorMsg)
+        {
+            return new Result(errorMsg);
+        }
     }
 
-    public class Result<T>
+    public class Result<T> : IResult<T>
     {
+        private readonly Result result;
         public T Value { get; }
+
+        public string Error => result.Error;
 
         private Result(T value)
         {
             this.Value = value;
+            result = Result.CreateSuccessfulResult();
         }
 
-        public static Result<T> CreateResult(T instance)
+        private Result(string errorMsg)
+        {
+            result = Result.CreateFailureResult(errorMsg);
+        }
+
+        public static Result<T> CreateSuccessfulResult(T instance)
         {
             return new Result<T>(instance);
         }
 
-    }
-
-    public class Result<T, E> : IResult<T, E>
-    {
-        private readonly Result<T> result;
-        private readonly bool successful;
-
-        public E Error { get; }
-
-        public T Value => result.Value;
-
-        private Result(T value)
+        public static Result<T> CreateFailureResult(string errorMsg)
         {
-            result = Result<T>.CreateResult(value);
-            successful = true;
+            return new Result<T>(errorMsg);
         }
 
-        private Result(E error)
-        {
-            successful = false;
-            this.Error = error;
-        }
-        public bool IsSuccessful() => successful;
-
-        public static Result<T, E> CreateSuccesResult(T value) => new Result<T, E>(value);
-        public static Result<T, E> CreateFailureResult(E error) => new Result<T, E>(error);
+        public bool IsSuccessful() => result.IsSuccessful();
     }
+
 }

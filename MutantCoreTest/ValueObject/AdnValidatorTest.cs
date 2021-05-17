@@ -1,4 +1,5 @@
-﻿using MutantCore.ValueObject;
+﻿using MutantCore.Models;
+using MutantCore.ValueObject;
 using System;
 using Xunit;
 
@@ -30,21 +31,21 @@ namespace MutantCoreTest.ValueObject
         [Fact]
         public void IsMutant_ValidAdn_ReturnTrue()
         {
-            AdnValidator adnValidator = new AdnValidator(mutant);
-            Assert.True(adnValidator.IsMutant().Result);
+            Dna dna = new Dna(mutant);
+            Assert.True(dna.IsMutant().Result.Value);
         }
 
         [Fact]
         public void IsMutant_NotValidAdn_ReturnFalse()
         {
-            AdnValidator adnValidator = new AdnValidator(human);
-            Assert.False(adnValidator.IsMutant().Result);
+            Dna dna = new Dna(human);
+            Assert.False(dna.IsMutant().Result.Value);
         }
 
         [Fact]
         public void IsMutant_NullAdn_ReturnException()
         {
-            Assert.Throws<ArgumentNullException>(()=> new AdnValidator(null));
+            Assert.Throws<ArgumentNullException>(()=> new Dna(null));
         }
     }
 }

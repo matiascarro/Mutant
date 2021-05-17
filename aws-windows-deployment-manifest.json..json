@@ -1,0 +1,14 @@
+{
+  "manifestVersion": 1,
+  "deployments": {
+    "aspNetCoreWeb": [
+      {
+        "name": "mutant",
+        "parameters": {
+          "archive": "Mutant.zip",
+          "iisPath": "/"
+        }
+      }
+    ]
+  }
+}
