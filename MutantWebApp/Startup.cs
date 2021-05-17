@@ -41,9 +41,8 @@ namespace MutantWebApp
             services.AddTransient<IDynamoDBContext>(s =>
             {
                 var client = s.GetService<IAmazonDynamoDB>();
-                var credentials = new BasicAWSCredentials("AKIA5HOEI4EOCSC2QFDL", "QfYLi5oWVqV1gBaz+Qm7uZ4H4B49JZYVB9t+nHf3");
-                var client2 = new AmazonDynamoDBClient(credentials, RegionEndpoint.USEast2);
-                DynamoDBContext context = new DynamoDBContext(client2);
+               
+                DynamoDBContext context = new DynamoDBContext(client);
                 return context;
             });
             services.AddTransient<AmazonDynamoDBClient>();
