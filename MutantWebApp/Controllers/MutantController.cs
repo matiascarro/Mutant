@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MutantCore.Contracts;
 using MutantWebApp.Extensions;
@@ -22,14 +23,20 @@ namespace MutantWebApp.Controllers
 
         // POST api/values
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<MutantResponseResourceForPost>> Post([FromBody] MutantResourceForPost mutantResource)
         {
+            if (mutantResource is null || mutantResource.Dna is null)
+                return BadRequest(new { error = "The dna prvided cannot be null" });
             var resource = await mutantService.IsMutant(requestId, mutantResource.Dna);
             return resource.CheckIfErrorApiResult(r => new MutantResponseResourceForPost { IsMutant = r });
         }
 
-        [Route("stats")]
         [HttpGet]
+        [Route("stats")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<MutantStatsResourceForGet>> GetStats()
         {
             var resource = await mutantService.GetStats();

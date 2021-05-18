@@ -21,7 +21,7 @@ namespace Data
         public async Task<Result<DnaStats>> GetStats()
         {
             
-            //Task above scan  data from dynamoDb
+            //Task above scanning data from dynamoDb
             Task<Result<int>> mutantCountTask = database.ScanData(mutant(true), s => s.Count);
             Task<Result<int>> humanCountTask = database.ScanData(mutant(false), s => s.Count);
             List<Task<Result<int>>> tasks = new List<Task<Result<int>>>
@@ -60,7 +60,11 @@ namespace Data
             
         }
 
-        //Function that help the creation of the request, parameter bool is to indentify human or mutant, when mutant takes true
+
+        /// <summary>
+        ///Function that helps the creation of the request, 
+        ///the parameter bool is to indentify human or mutant, it uses true when mutant is required otherwise it uses false instead
+        /// </summary>
         private Func<bool, ScanRequest> mutant = b => new ScanRequest
         {
             TableName = "MutantStats",
