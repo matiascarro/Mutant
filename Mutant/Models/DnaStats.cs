@@ -9,6 +9,6 @@ namespace MutantCore.Models
         public int CountMutantDna { get; set; }
         public int CountHumanDna { get; set; }
 
-        public double Ratio => CountHumanDna + CountMutantDna == 0 ? 0 : CountMutantDna / (CountHumanDna + CountMutantDna);
+        public double Ratio => CountHumanDna + CountMutantDna == 0 ? 0 : CountMutantDna / (CountHumanDna + CountMutantDna + 0.0);
     }
 }

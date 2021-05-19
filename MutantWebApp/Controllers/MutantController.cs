@@ -40,12 +40,12 @@ namespace MutantWebApp.Controllers
         public async Task<ActionResult<MutantStatsResourceForGet>> GetStats()
         {
             var resource = await mutantService.GetStats();
-            return resource.CheckIfErrorApiResult(stats => new MutantStatsResourceForGet 
-            { 
+            return resource.CheckIfErrorApiResult(stats => new MutantStatsResourceForGet
+            {
                 count_human_dna = stats.CountHumanDna,
                 count_mutant_dna = stats.CountMutantDna,
-                ratio = stats.Ratio
-            });
+                ratio = Math.Round(stats.Ratio, 1)
+            }); ;
         }
 
     }
